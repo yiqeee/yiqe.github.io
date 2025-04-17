@@ -293,6 +293,58 @@
             const volumeSlider = document.getElementById('volume-slider');
             const volumeIcon = document.querySelector('.volume-icon');
             
+            // Gewünschte endgültige Lautstärke speichern
+            const targetVolume = 0.5; // 50% Lautstärke
+            
+            // Musik mit Fade-In starten
+            function startMusicWithFadeIn() {
+                // Musik auf 0 Lautstärke stellen zu Beginn
+                music.volume = 0;
+                
+                // Musik starten
+                music.play().then(() => {
+                    // Fade-In über 3 Sekunden
+                    fadeAudioIn(music, targetVolume, 3000);
+                }).catch(e => {
+                    console.log('Fehler beim Starten der Musik: ', e);
+                });
+            }
+            
+            // Fade-In Funktion
+            function fadeAudioIn(audioElement, targetVolume, duration) {
+                const interval = 50; // Aktualisierung alle 50ms
+                const steps = duration / interval;
+                const stepVolume = targetVolume / steps;
+                let currentStep = 0;
+                
+                const fadeInterval = setInterval(() => {
+                    currentStep++;
+                    const newVolume = Math.min(stepVolume * currentStep, targetVolume);
+                    audioElement.volume = newVolume;
+                    
+                    // Aktualisiere auch den Slider-Wert
+                    volumeSlider.value = newVolume;
+                    
+                    // Aktualisiere das Icon basierend auf der Lautstärke
+                    updateVolumeIcon(newVolume);
+                    
+                    if (currentStep >= steps) {
+                        clearInterval(fadeInterval);
+                    }
+                }, interval);
+            }
+            
+            // Funktion zum Aktualisieren des Lautstärke-Icons
+            function updateVolumeIcon(volume) {
+                if (volume === 0) {
+                    volumeIcon.className = 'fas fa-volume-mute volume-icon';
+                } else if (volume < 0.5) {
+                    volumeIcon.className = 'fas fa-volume-down volume-icon';
+                } else {
+                    volumeIcon.className = 'fas fa-volume-up volume-icon';
+                }
+            }
+            
             // Klick-Event auf dem gesamten Intro-Screen
             introScreen.addEventListener('click', function() {
                 // Blende Intro aus und Hauptinhalt ein
@@ -301,40 +353,23 @@
                 mainContent.style.opacity = '1';
                 mainContent.style.visibility = 'visible';
                 
-                // Starte die Musik
-                music.play().catch(e => {
-                    console.log('Fehler beim Starten der Musik: ', e);
-                });
+                // Starte die Musik mit Fade-In
+                startMusicWithFadeIn();
             });
-            
-            // Lautstärke initial setzen
-            music.volume = volumeSlider.value;
             
             // Volumen-Slider-Funktionalität
             volumeSlider.addEventListener('input', function() {
                 music.volume = this.value;
-                
-                // Icon basierend auf Lautstärke aktualisieren
-                if (this.value == 0) {
-                    volumeIcon.className = 'fas fa-volume-mute volume-icon';
-                } else if (this.value < 0.5) {
-                    volumeIcon.className = 'fas fa-volume-down volume-icon';
-                } else {
-                    volumeIcon.className = 'fas fa-volume-up volume-icon';
-                }
+                updateVolumeIcon(this.value);
             });
             
             // Audio anhalten/starten beim Klick auf das Icon
             volumeIcon.addEventListener('click', function() {
                 if (music.paused) {
+                    // Wenn wir die Musik wieder starten, faden wir sie auch ein
+                    music.volume = 0;
                     music.play();
-                    if (music.volume > 0) {
-                        if (music.volume < 0.5) {
-                            volumeIcon.className = 'fas fa-volume-down volume-icon';
-                        } else {
-                            volumeIcon.className = 'fas fa-volume-up volume-icon';
-                        }
-                    }
+                    fadeAudioIn(music, targetVolume, 1000); // Schnellerer Fade-In beim Wiederstart
                 } else {
                     music.pause();
                     volumeIcon.className = 'fas fa-volume-mute volume-icon';
