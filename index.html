@@ -29,6 +29,7 @@
             align-items: center;
             z-index: 1000;
             transition: opacity 0.7s ease, visibility 0.7s;
+            cursor: pointer;
         }
         
         .intro-content {
@@ -39,38 +40,16 @@
         
         .intro-screen h2 {
             font-size: 24px;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
             color: #fff;
             text-shadow: 0 0 10px rgba(255,255,255,0.5);
         }
         
-        .click-me-btn {
-            padding: 15px 30px;
-            background-color: transparent;
-            color: white;
-            border: 2px solid white;
-            border-radius: 30px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            animation: pulse 1.5s infinite;
-        }
-        
-        .click-me-btn:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            transform: scale(1.05);
-        }
-        
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.6);
-            }
-            70% {
-                box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
-            }
+        .intro-screen p {
+            color: #ccc;
+            font-size: 16px;
+            margin-top: 0;
+            text-shadow: 0 0 8px rgba(255,255,255,0.3);
         }
         
         /* Blurred Background */
@@ -80,11 +59,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('pfp.png');
-            background-position: center;
-            background-size: cover;
-            filter: blur(10px) brightness(0.3);
-            opacity: 0.6;
+            background-color: #000000;
+            filter: blur(5px);
+            opacity: 0.8;
         }
         
         /* Hauptseite */
@@ -256,11 +233,6 @@
             .intro-screen h2 {
                 font-size: 20px;
             }
-            
-            .click-me-btn {
-                padding: 12px 25px;
-                font-size: 16px;
-            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -271,7 +243,7 @@
         <div class="blur-bg"></div>
         <div class="intro-content">
             <h2>Willkommen zu meinem Profil</h2>
-            <button class="click-me-btn" id="enter-btn">ENTER</button>
+            <p>Klicke irgendwo, um fortzufahren</p>
         </div>
     </div>
     
@@ -318,13 +290,12 @@
             // Elemente
             const introScreen = document.getElementById('intro-screen');
             const mainContent = document.getElementById('main-content');
-            const enterBtn = document.getElementById('enter-btn');
             const music = document.getElementById('background-music');
             const volumeSlider = document.getElementById('volume-slider');
             const volumeIcon = document.querySelector('.volume-icon');
             
-            // Enter-Button Funktion
-            enterBtn.addEventListener('click', function() {
+            // Klick-Event auf dem gesamten Intro-Screen
+            introScreen.addEventListener('click', function() {
                 // Blende Intro aus und Hauptinhalt ein
                 introScreen.style.opacity = '0';
                 introScreen.style.visibility = 'hidden';
