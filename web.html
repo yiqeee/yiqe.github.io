@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my bio</title>
+    <style>
+        /* Grundlegende Stile */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        /* Profilbereich */
+        .profile {
+            margin-bottom: 30px;
+        }
+        
+        .profile img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 10px rgba(255,255,255,0.1);
+        }
+        
+        .profile h1 {
+            margin-top: 20px;
+            font-size: 28px;
+            color: #ffffff;
+        }
+        
+        .profile p {
+            font-size: 18px;
+            color: #cccccc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Soziale Links */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: #222;
+            border-radius: 50%;
+            color: #fff;
+            text-decoration: none;
+            font-size: 24px;
+            box-shadow: 0 2px 8px rgba(255,255,255,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(255,255,255,0.2);
+        }
+        
+        /* Farben für verschiedene Netzwerke */
+        .instagram { color: #E1306C; }
+        .github { color: #ffffff; }
+        .tiktok { color: #ffffff; }
+        
+        /* Footer */
+        footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: #777;
+        }
+        
+        /* Responsives Design */
+        @media (max-width: 600px) {
+            .profile img {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .profile h1 {
+                font-size: 24px;
+            }
+            
+            .profile p {
+                font-size: 16px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="profile">
+            <!-- Ersetze den Platzhalter mit deinem eigenen Bild -->
+            <img src="pfp.png" alt="Profilbild">
+            <h1>yiqe</h1>
+            <p>discord: ilovepola</p>
+        </div>
+        
+        <div class="social-links">
+            <!-- Deine Links zu sozialen Netzwerken -->
+            <a href="https://github.com/yiqeee" class="social-link github" aria-label="GitHub" target="_blank">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.tiktok.com/@.yiqe" class="social-link tiktok" aria-label="TikTok" target="_blank">
+                <i class="fab fa-tiktok"></i>
+            </a>
+            <a href="https://www.instagram.com/yz.rvn" class="social-link instagram" aria-label="Instagram" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+        
+        <footer>
+            <p>© 2025. All Rights Reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
