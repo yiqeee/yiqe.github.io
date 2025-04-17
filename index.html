@@ -120,6 +120,7 @@
         }
         
         .social-link {
+            position: relative;
             display: flex;
             align-items: center;
             width: 55px;
@@ -131,7 +132,6 @@
             font-size: 26px;
             box-shadow: 0 2px 8px rgba(255,255,255,0.1);
             transition: all 0.3s ease;
-            position: relative;
             z-index: 2;
             overflow: hidden;
         }
@@ -152,12 +152,19 @@
         }
         
         .social-link .label {
+            position: absolute;
+            left: 0;
+            right: 0;
+            text-align: center;
             opacity: 0;
             font-size: 16px;
             font-weight: bold;
             transition: opacity 0.3s ease;
             white-space: nowrap;
-            padding-right: 15px;
+        }
+        
+        .social-link:hover .icon {
+            min-width: 40px;
         }
         
         .social-link:hover .label {
