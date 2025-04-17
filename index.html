@@ -94,6 +94,32 @@
             color: #777;
         }
         
+        /* Audio-Player stylen (optional) */
+        .audio-controls {
+            margin-top: 20px;
+        }
+        
+        .audio-controls button {
+            background-color: #222;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 0 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .audio-controls button:hover {
+            background-color: #333;
+        }
+        
+        /* Verstecke das Standard-Audio-Element */
+        audio {
+            display: none;
+        }
+        
         /* Responsives Design */
         @media (max-width: 600px) {
             .profile img {
@@ -136,9 +162,38 @@
             </a>
         </div>
         
+        <!-- Musik-Player -->
+        <audio id="background-music" loop>
+            <!-- Hier die Musikdatei einfügen -->
+            <source src="musik.mp3" type="audio/mpeg">
+            Dein Browser unterstützt das Audio-Element nicht.
+        </audio>
+        
+        <div class="audio-controls">
+            <button onclick="document.getElementById('background-music').play()">Musik abspielen</button>
+            <button onclick="document.getElementById('background-music').pause()">Musik pausieren</button>
+        </div>
+        
         <footer>
             <p>© 2025. All Rights Reserved.</p>
         </footer>
     </div>
+    
+    <script>
+        // Optional: Musik automatisch abspielen (funktioniert in vielen modernen Browsern nicht mehr ohne Benutzerinteraktion)
+        window.onload = function() {
+            // Musik wird versucht automatisch zu starten, aber die meisten Browser blockieren dies
+            var music = document.getElementById('background-music');
+            // Wir versuchen es trotzdem
+            var playPromise = music.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.catch(function() {
+                    // Automatisches Abspielen wurde verhindert
+                    console.log('Automatisches Abspielen wurde vom Browser blockiert.');
+                });
+            }
+        }
+    </script>
 </body>
 </html>
