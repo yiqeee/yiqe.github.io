@@ -120,13 +120,12 @@
         }
         
         .social-link {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            justify-content: center;
             width: 55px;
             height: 55px;
             background-color: #222;
-            border-radius: 50%;
+            border-radius: 30px;
             color: #fff;
             text-decoration: none;
             font-size: 26px;
@@ -134,37 +133,35 @@
             transition: all 0.3s ease;
             position: relative;
             z-index: 2;
+            overflow: hidden;
         }
         
         .social-link:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 14px rgba(255,255,255,0.2);
             width: 180px;
-            border-radius: 30px;
         }
         
         .social-link .icon {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 55px;
+            min-width: 55px;
+            height: 55px;
             transition: all 0.3s ease;
         }
         
         .social-link .label {
-            position: absolute;
-            right: 20px;
             opacity: 0;
             font-size: 16px;
             font-weight: bold;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            transform: translateX(10px);
+            transition: opacity 0.3s ease;
             white-space: nowrap;
+            padding-right: 15px;
         }
         
         .social-link:hover .label {
             opacity: 1;
-            transform: translateX(0);
         }
         
         /* Farben für verschiedene Netzwerke */
