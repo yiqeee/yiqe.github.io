@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>my bio</title>
     <style>
-        /* Grundlegende Stile */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -16,7 +15,6 @@
             overflow: hidden;
         }
         
-        /* Intro-Screen */
         .intro-screen {
             position: fixed;
             top: 0;
@@ -52,7 +50,6 @@
             text-shadow: 0 0 8px rgba(255,255,255,0.3);
         }
         
-        /* Blurred Background */
         .blur-bg {
             position: absolute;
             top: 0;
@@ -64,7 +61,6 @@
             opacity: 0.8;
         }
         
-        /* Hauptseite */
         .main-content {
             display: flex;
             justify-content: center;
@@ -83,7 +79,6 @@
             margin-top: -50px;
         }
         
-        /* Profilbereich */
         .profile {
             margin-bottom: 30px;
         }
@@ -109,7 +104,6 @@
             margin: 0 auto;
         }
         
-        /* Soziale Links */
         .social-links {
             display: flex;
             justify-content: center;
@@ -171,19 +165,16 @@
             opacity: 1;
         }
         
-        /* Farben für verschiedene Netzwerke */
         .instagram { color: #E1306C; }
         .github { color: #ffffff; }
         .tiktok { color: #ffffff; }
         
-        /* Footer */
         footer {
             margin-top: 50px;
             font-size: 14px;
             color: #777;
         }
         
-        /* Audio-Player Styling */
         .audio-controls {
             position: fixed;
             bottom: 20px;
@@ -231,12 +222,10 @@
             border: none;
         }
         
-        /* Verstecke das Standard-Audio-Element */
         audio {
             display: none;
         }
         
-        /* Responsives Design */
         @media (max-width: 600px) {
             .profile img {
                 width: 150px;
@@ -275,7 +264,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
-    <!-- Intro Screen -->
     <div class="intro-screen" id="intro-screen">
         <div class="blur-bg"></div>
         <div class="intro-content">
@@ -283,7 +271,6 @@
         </div>
     </div>
     
-    <!-- Hauptinhalt -->
     <div class="main-content" id="main-content">
         <div class="container">
             <div class="profile">
@@ -313,7 +300,6 @@
         </div>
     </div>
     
-    <!-- Musik-Player -->
     <audio id="background-music" loop>
         <source src="music.mp3" type="audio/mpeg">
         Dein Browser unterstützt das Audio-Element nicht.
@@ -326,33 +312,26 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Elemente
             const introScreen = document.getElementById('intro-screen');
             const mainContent = document.getElementById('main-content');
             const music = document.getElementById('background-music');
             const volumeSlider = document.getElementById('volume-slider');
             const volumeIcon = document.querySelector('.volume-icon');
             
-            // Gewünschte endgültige Lautstärke speichern
-            const targetVolume = 0.5; // 50% Lautstärke
+            const targetVolume = 0.5;
             
-            // Musik mit Fade-In starten
             function startMusicWithFadeIn() {
-                // Musik auf 0 Lautstärke stellen zu Beginn
                 music.volume = 0;
                 
-                // Musik starten
                 music.play().then(() => {
-                    // Fade-In über 3 Sekunden
                     fadeAudioIn(music, targetVolume, 3000);
                 }).catch(e => {
                     console.log('Fehler beim Starten der Musik: ', e);
                 });
             }
             
-            // Fade-In Funktion
             function fadeAudioIn(audioElement, targetVolume, duration) {
-                const interval = 50; // Aktualisierung alle 50ms
+                const interval = 50;
                 const steps = duration / interval;
                 const stepVolume = targetVolume / steps;
                 let currentStep = 0;
@@ -362,10 +341,8 @@
                     const newVolume = Math.min(stepVolume * currentStep, targetVolume);
                     audioElement.volume = newVolume;
                     
-                    // Aktualisiere auch den Slider-Wert
                     volumeSlider.value = newVolume;
                     
-                    // Aktualisiere das Icon basierend auf der Lautstärke
                     updateVolumeIcon(newVolume);
                     
                     if (currentStep >= steps) {
@@ -374,7 +351,6 @@
                 }, interval);
             }
             
-            // Funktion zum Aktualisieren des Lautstärke-Icons
             function updateVolumeIcon(volume) {
                 if (volume === 0) {
                     volumeIcon.className = 'fas fa-volume-mute volume-icon';
@@ -385,31 +361,25 @@
                 }
             }
             
-            // Klick-Event auf dem gesamten Intro-Screen
             introScreen.addEventListener('click', function() {
-                // Blende Intro aus und Hauptinhalt ein
                 introScreen.style.opacity = '0';
                 introScreen.style.visibility = 'hidden';
                 mainContent.style.opacity = '1';
                 mainContent.style.visibility = 'visible';
                 
-                // Starte die Musik mit Fade-In
                 startMusicWithFadeIn();
             });
             
-            // Volumen-Slider-Funktionalität
             volumeSlider.addEventListener('input', function() {
                 music.volume = this.value;
                 updateVolumeIcon(this.value);
             });
             
-            // Audio anhalten/starten beim Klick auf das Icon
             volumeIcon.addEventListener('click', function() {
                 if (music.paused) {
-                    // Wenn wir die Musik wieder starten, faden wir sie auch ein
                     music.volume = 0;
                     music.play();
-                    fadeAudioIn(music, targetVolume, 1000); // Schnellerer Fade-In beim Wiederstart
+                    fadeAudioIn(music, targetVolume, 1000);
                 } else {
                     music.pause();
                     volumeIcon.className = 'fas fa-volume-mute volume-icon';
